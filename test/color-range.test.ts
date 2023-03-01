@@ -52,7 +52,7 @@ describe("test add function", () => {
   });
 
   it("should output css brute-force approximation srgb", () => {
-    expect(colorRangeBruteForceSRGB.cssLinearGradient).toBe('linear-gradient(to right in srgb-linear,rgb(100% 100% 100%),rgb(73.536% 73.536% 100%),rgb(0% 0% 100%))');
+    expect(colorRangeBruteForceSRGB.cssLinearGradient).toBe('linear-gradient(to right,rgb(100% 100% 100%),rgb(73.536% 73.536% 100%),rgb(0% 0% 100%))');
   });
 
 });
