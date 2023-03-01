@@ -29,8 +29,8 @@ class ColorRangeInspector {
         const constrainEnd = container.width;
         const nextPosition = evX - container.x;
         const constrainedStart = nextPosition < constrainStart;
-        const contrainedEnd = nextPosition > constrainEnd;
-        if (!(constrainedStart || contrainedEnd)) {
+        const constrainedEnd = nextPosition > constrainEnd;
+        if (!(constrainedStart || constrainedEnd)) {
             this.inspectorUiEl.style.left = (nextPosition - 1) + 'px';
             this.inspectorDraggerEl.style.left = (nextPosition - 1) + 'px';
             this.updateValues((nextPosition) / container.width);
@@ -40,7 +40,7 @@ class ColorRangeInspector {
             this.inspectorDraggerEl.style.left = (constrainStart - 1) + 'px';
             this.updateValues(constrainStart / container.width);
         }
-        else if (contrainedEnd) {
+        else if (constrainedEnd) {
             this.inspectorUiEl.style.left = (constrainEnd) + 'px';
             this.inspectorDraggerEl.style.left = (constrainEnd) + 'px';
             this.updateValues(constrainEnd / container.width);
