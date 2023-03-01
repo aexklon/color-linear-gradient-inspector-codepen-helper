@@ -13,14 +13,13 @@ export class ColorRange
     {
         this.from = param0.from;
         this.to = param0.to;
+
         this.space = param0.space || 'srgb';
-        this.range = param0.from.range(
-            param0.to,
-            {
-                space: this.space,
-                outputSpace: param0.outputSpace || 'srgb',
-            }
-        )
+        const rangeOptions: any = {};
+        if (param0.space) rangeOptions.space = param0.space;
+        if (param0.outputSpace) rangeOptions.outputSpace = param0.outputSpace || 'srgb';
+        if (param0.hue) rangeOptions.hue = param0.hue;
+        this.range = param0.from.range(param0.to, rangeOptions)
 
         if (param0.alt && param0.altMessageEl) {
             param0.altMessageEl.innerHTML = param0.altMessage || '';
@@ -64,6 +63,7 @@ interface ColorLinearGradientConstructor
     to: Color;
     space?: string;
     outputSpace?: string;
+    hue?: string;
     alt: boolean;
     altMessageEl?: Element | undefined | null;
     altMessage?: string;
