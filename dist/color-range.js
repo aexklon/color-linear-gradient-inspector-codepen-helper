@@ -21,17 +21,17 @@ class ColorRange {
             !param0.alt ?
                 this.generateCssLinearGradient() :
                 param0.alt && param0.altStrategy === 'brute-force approximation' ?
-                    this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, param0.altInSpace || 'srgb') :
-                    this.generateCssLinearGradient();
+                    this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, param0.altInSpace || 'srgb', !!param0.omitIn) :
+                    this.generateCssLinearGradient(!!param0.omitIn);
     }
-    generateCssLinearGradient() {
+    generateCssLinearGradient(omitIn) {
         return `linear-gradient(
-            to right in ${this.space},
+            to right${omitIn ? '' : ' in ' + this.space},
             ${this.from},
             ${this.to}
         )`;
     }
-    generateCssLinearGradientAltBruteForceApproximation(steps, space) {
+    generateCssLinearGradientAltBruteForceApproximation(steps, space, omitIn) {
         const stops = [];
         const formatCss = space === 'srgb' ?
             (c) => c.to('srgb').toString({ format: "rgb" }) :
@@ -40,7 +40,7 @@ class ColorRange {
             const color = this.range(i / (steps - 1));
             stops.push(formatCss(color));
         }
-        return `linear-gradient(to right${space === 'srgb' ? '' : ' in ' + space},${stops.join(',')})`;
+        return `linear-gradient(to right${omitIn ? '' : space === 'srgb' ? '' : ' in ' + space},${stops.join(',')})`;
     }
 }
 exports.ColorRange = ColorRange;
