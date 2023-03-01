@@ -19,7 +19,7 @@ class ColorRange {
         }
         this.cssLinearGradient =
             !param0.alt ?
-                this.generateCssLinearGradient() :
+                this.generateCssLinearGradient(!!param0.omitIn) :
                 param0.alt && param0.altStrategy === 'brute-force approximation' ?
                     this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, param0.altInSpace || 'srgb', !!param0.omitIn) :
                     this.generateCssLinearGradient(!!param0.omitIn);
