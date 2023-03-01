@@ -1,6 +1,6 @@
 {
   "name": "color-linear-gradient-inspector-codepen-helper",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Just a helper that pack some of the functionalities I needed to build some o my code pens regarding linear-gradient, color spaces, and CSS Color Module Level 4",
   "main": "./dist/index.js",
   "scripts": {
