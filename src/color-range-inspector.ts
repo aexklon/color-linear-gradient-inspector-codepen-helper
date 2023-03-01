@@ -17,7 +17,7 @@ export class ColorRangeInspector
         this.range = param0.range;
 
         if((this.stripEl as HTMLElement)?.style) {
-            (this.stripEl as any).style = 'background: red;';
+            (this.stripEl as any).style = `background-image: ${param0.stripBackgroundImage};`;
         }
 
         this.updateIndicatorPosition(
@@ -73,6 +73,7 @@ interface ColorRangeInspectorContructor
     indicatorEl: Element;
     indicatorUiEl: Element;
     range: Range;
+    stripBackgroundImage: string;
     components: ColorComponentInspector[];
 }
 
