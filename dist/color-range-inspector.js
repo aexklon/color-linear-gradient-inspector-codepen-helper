@@ -10,7 +10,7 @@ class ColorRangeInspector {
         this.components = param0.components;
         this.range = param0.range;
         if ((_a = this.stripEl) === null || _a === void 0 ? void 0 : _a.style) {
-            this.stripEl.style = 'background: red;';
+            this.stripEl.style = `background-image: ${param0.stripBackgroundImage};`;
         }
         this.updateIndicatorPosition(this.stripEl.getBoundingClientRect().x +
             (this.stripEl.getBoundingClientRect().width / 2));
