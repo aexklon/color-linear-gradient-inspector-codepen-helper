@@ -1,3 +1,4 @@
+import Color from 'colorjs.io';
 import { Range } from 'colorjs.io/types/src/interpolation';
 
 export class ColorRangeInspector
@@ -34,8 +35,8 @@ export class ColorRangeInspector
     {
         const color = this.range(percent) as any;
 
-        color.coords.forEach((c: number, i: number): void => {
-            this.components[i].el.innerHTML = this.components[i].format(c);
+        this.components.forEach((component, i: number): void => {
+            (component as any).innerHTML = component.format(color, i);
         })
     }
 
@@ -78,5 +79,5 @@ interface ColorRangeInspectorContructor
 interface ColorComponentInspector {
     el: Element;
     multiplier?: number;
-    format: (c: number) => string
+    format: (c: Color, i: number) => string
 }
