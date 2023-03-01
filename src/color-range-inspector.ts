@@ -58,8 +58,8 @@ export class ColorRangeInspector
             this.inspectorDraggerEl.style.left = (constrainStart -1) + 'px';
             this.updateValues(constrainStart / container.width);
         } else if (constrainedEnd) {
-            this.inspectorUiEl.style.left = (constrainEnd) + 'px';
-            this.inspectorDraggerEl.style.left = (constrainEnd) + 'px';
+            this.inspectorUiEl.style.left = (constrainEnd -1) + 'px';
+            this.inspectorDraggerEl.style.left = (constrainEnd -1) + 'px';
             this.updateValues(constrainEnd / container.width);
         }
     }
