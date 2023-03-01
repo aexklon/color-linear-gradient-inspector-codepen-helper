@@ -10,15 +10,15 @@ class ColorRange {
             space: this.space,
             outputSpace: param0.outputSpace || 'srgb',
         });
-        if (param0.altMessageEl) {
+        if (param0.alt && param0.altMessageEl) {
             param0.altMessageEl.innerHTML = param0.altMessage || '';
         }
         this.cssLinearGradient =
             !param0.alt ?
                 this.generateCssLinearGradient() :
-                param0.altStrategy === 'brute-force approximation' ?
+                param0.alt && param0.altStrategy === 'brute-force approximation' ?
                     this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, this.space) :
-                    param0.altStrategy === 'brute-force approximation srgb' ?
+                    param0.alt && param0.altStrategy === 'brute-force approximation srgb' ?
                         this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, 'srgb') :
                         this.generateCssLinearGradient();
     }
