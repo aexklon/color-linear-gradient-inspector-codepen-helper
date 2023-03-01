@@ -3,16 +3,16 @@ import { Range } from 'colorjs.io/types/src/interpolation';
 export class ColorRangeInspector
 {
     private stripEl: any;
-    private indicatorEl: any;
-    private indicatorUiEl: any;
+    private inspectorDraggerEl: any;
+    private inspectorUiEl: any;
     private range: Range;
     private components: ColorComponentInspector[];
 
     constructor(param0: ColorRangeInspectorContructor)
     {
         this.stripEl = param0.stripEl;
-        this.indicatorEl = param0.indicatorEl;
-        this.indicatorUiEl = param0.indicatorUiEl;
+        this.inspectorDraggerEl = param0.inspectorDraggerEl;
+        this.inspectorUiEl = param0.inspectorUiEl;
         this.components = param0.components;
         this.range = param0.range;
 
@@ -23,7 +23,7 @@ export class ColorRangeInspector
             (this.stripEl.getBoundingClientRect().width / 2)
         );
 
-        this.indicatorEl.addEventListener('drag', (event: DragEvent): void => {
+        this.inspectorDraggerEl.addEventListener('drag', (event: DragEvent): void => {
             event.preventDefault();
             event.stopPropagation();
             this.updateIndicatorPosition(event.x);
@@ -50,16 +50,16 @@ export class ColorRangeInspector
         const contrainedEnd = nextPosition > constrainEnd;
 
         if (!(constrainedStart || contrainedEnd)) {
-            this.indicatorUiEl.style.left = (nextPosition -1) + 'px';
-            this.indicatorEl.style.left = (nextPosition -1) + 'px';
+            this.inspectorUiEl.style.left = (nextPosition -1) + 'px';
+            this.inspectorDraggerEl.style.left = (nextPosition -1) + 'px';
             this.updateValues((nextPosition) / container.width);
         } else if (constrainedStart) {
-            this.indicatorUiEl.style.left = (constrainStart -1) + 'px';
-            this.indicatorEl.style.left = (constrainStart -1) + 'px';
+            this.inspectorUiEl.style.left = (constrainStart -1) + 'px';
+            this.inspectorDraggerEl.style.left = (constrainStart -1) + 'px';
             this.updateValues(constrainStart / container.width);
         } else if (contrainedEnd) {
-            this.indicatorUiEl.style.left = (constrainEnd) + 'px';
-            this.indicatorEl.style.left = (constrainEnd) + 'px';
+            this.inspectorUiEl.style.left = (constrainEnd) + 'px';
+            this.inspectorDraggerEl.style.left = (constrainEnd) + 'px';
             this.updateValues(constrainEnd / container.width);
         }
     }
@@ -68,8 +68,8 @@ export class ColorRangeInspector
 interface ColorRangeInspectorContructor
 {
     stripEl: Element;
-    indicatorEl: Element;
-    indicatorUiEl: Element;
+    inspectorDraggerEl: Element;
+    inspectorUiEl: Element;
     range: Range;
     stripBackgroundImage: string;
     components: ColorComponentInspector[];
