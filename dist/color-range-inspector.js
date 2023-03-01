@@ -20,7 +20,7 @@ class ColorRangeInspector {
     updateValues(percent) {
         const color = this.range(percent);
         this.components.forEach((component, i) => {
-            component.innerHTML = component.format(color, i);
+            component.el.innerHTML = component.format(color, i);
         });
     }
     updateIndicatorPosition(evX) {

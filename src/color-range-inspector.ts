@@ -36,7 +36,7 @@ export class ColorRangeInspector
         const color = this.range(percent) as any;
 
         this.components.forEach((component, i: number): void => {
-            (component as any).innerHTML = component.format(color, i);
+            (component.el as any).innerHTML = component.format(color, i);
         })
     }
 
