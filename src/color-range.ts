@@ -56,7 +56,7 @@ export class ColorRange
             const color = this.range(i/(steps -1)) as any;
             stops.push(formatCss(color));
         }
-        return `linear-gradient(to right in ${this.space},${stops.join(',')})`;
+        return `linear-gradient(to right${this.space === 'srgb' ? '' : 'in ' + this.space},${stops.join(',')})`;
     }
 }
 
