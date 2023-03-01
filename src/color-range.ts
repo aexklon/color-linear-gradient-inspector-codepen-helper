@@ -30,9 +30,7 @@ export class ColorRange
             !param0.alt ?
                 this.generateCssLinearGradient() :
             param0.alt && param0.altStrategy === 'brute-force approximation' ?
-                this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, this.space) :
-            param0.alt && param0.altStrategy === 'brute-force approximation srgb' ?
-                this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, 'srgb') :
+                this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, param0.altInSpace || 'srgb') :
                 this.generateCssLinearGradient()
     }
 
@@ -56,7 +54,7 @@ export class ColorRange
             const color = this.range(i/(steps -1)) as any;
             stops.push(formatCss(color));
         }
-        return `linear-gradient(to right${space === 'srgb' ? '' : ' in ' + this.space},${stops.join(',')})`;
+        return `linear-gradient(to right${space === 'srgb' ? '' : ' in ' + space},${stops.join(',')})`;
     }
 }
 
@@ -69,6 +67,7 @@ interface ColorLinearGradientConstructor
     alt: boolean;
     altMessageEl?: Element | undefined | null;
     altMessage?: string;
-    altStrategy?: 'brute-force approximation' | 'brute-force approximation srgb';
+    altInSpace?:string;
+    altStrategy?: 'brute-force approximation';
     altResolution?: number;
 }

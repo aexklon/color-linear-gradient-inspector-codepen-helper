@@ -17,10 +17,8 @@ class ColorRange {
             !param0.alt ?
                 this.generateCssLinearGradient() :
                 param0.alt && param0.altStrategy === 'brute-force approximation' ?
-                    this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, this.space) :
-                    param0.alt && param0.altStrategy === 'brute-force approximation srgb' ?
-                        this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, 'srgb') :
-                        this.generateCssLinearGradient();
+                    this.generateCssLinearGradientAltBruteForceApproximation(param0.altResolution || 2, param0.altInSpace || 'srgb') :
+                    this.generateCssLinearGradient();
     }
     generateCssLinearGradient() {
         return `linear-gradient(
@@ -38,7 +36,7 @@ class ColorRange {
             const color = this.range(i / (steps - 1));
             stops.push(formatCss(color));
         }
-        return `linear-gradient(to right${space === 'srgb' ? '' : ' in ' + this.space},${stops.join(',')})`;
+        return `linear-gradient(to right${space === 'srgb' ? '' : ' in ' + space},${stops.join(',')})`;
     }
 }
 exports.ColorRange = ColorRange;

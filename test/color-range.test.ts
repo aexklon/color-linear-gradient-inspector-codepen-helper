@@ -17,6 +17,7 @@ describe("test add function", () => {
     outputSpace: "srgb-linear",
     alt: true, // !CSS.supports('background', 'color(srgb-linear 1 1 0)'),
     altStrategy: 'brute-force approximation',
+    altInSpace: 'srgb-linear',
     altResolution: 3,
     altMessageEl: null, // document.getElementById('message'),
     altMessage: 'This browser does not support CSS Color Module Level 4 color function. What you are seeing above is a brute-force approximation'
@@ -28,7 +29,8 @@ describe("test add function", () => {
     space: "srgb-linear",
     outputSpace: "srgb-linear",
     alt: true, // !CSS.supports('background', 'color(srgb-linear 1 1 0)'),
-    altStrategy: 'brute-force approximation srgb',
+    altStrategy: 'brute-force approximation',
+    altInSpace: 'srgb',
     altResolution: 3,
     altMessageEl: null, // document.getElementById('message'),
     altMessage: 'This browser does not support CSS Color Module Level 4 color function. What you are seeing above is a brute-force approximation'
