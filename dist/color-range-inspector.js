@@ -11,11 +11,6 @@ class ColorRangeInspector {
         this.stripEl.style.backgroundImage = param0.stripBackgroundImage;
         this.updateIndicatorPosition(this.stripEl.getBoundingClientRect().x +
             (this.stripEl.getBoundingClientRect().width / 2));
-        this.inspectorDraggerEl.addEventListener('drag', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            this.updateIndicatorPosition(event.x);
-        });
     }
     updateValues(percent) {
         const color = this.range(percent);

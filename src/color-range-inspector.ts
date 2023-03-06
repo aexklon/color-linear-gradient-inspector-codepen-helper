@@ -23,12 +23,6 @@ export class ColorRangeInspector
             this.stripEl.getBoundingClientRect().x +
             (this.stripEl.getBoundingClientRect().width / 2)
         );
-
-        this.inspectorDraggerEl.addEventListener('drag', (event: DragEvent): void => {
-            event.preventDefault();
-            event.stopPropagation();
-            this.updateIndicatorPosition(event.x);
-        })
     }
 
     private updateValues(percent: number): void
