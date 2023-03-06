@@ -49,9 +49,8 @@ export class ColorRangeInspector
         this.moving = true;
         stripEl.classList.add('moving');
         this.updateIndicatorPosition(
-            event.hasOwnProperty('x') ?
-                (event as MouseEvent).x :
-                (event as TouchEvent).touches[0].clientX
+            (event as MouseEvent)?.x ||
+            (event as TouchEvent).touches[0].clientX
         );
     }
 
@@ -61,9 +60,8 @@ export class ColorRangeInspector
             event.preventDefault();
             event.stopPropagation();
             this.updateIndicatorPosition(
-                event.hasOwnProperty('x') ?
-                    (event as MouseEvent).x :
-                    (event as TouchEvent).touches[0].clientX
+                (event as MouseEvent)?.x ||
+                (event as TouchEvent).touches[0].clientX
             );
         }
     }

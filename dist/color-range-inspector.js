@@ -29,16 +29,14 @@ class ColorRangeInspector {
         event.stopPropagation();
         this.moving = true;
         stripEl.classList.add('moving');
-        this.updateIndicatorPosition(event.hasOwnProperty('x') ?
-            event.x :
+        this.updateIndicatorPosition((event === null || event === void 0 ? void 0 : event.x) ||
             event.touches[0].clientX);
     }
     move(event, _stripEl) {
         if (this.moving) {
             event.preventDefault();
             event.stopPropagation();
-            this.updateIndicatorPosition(event.hasOwnProperty('x') ?
-                event.x :
+            this.updateIndicatorPosition((event === null || event === void 0 ? void 0 : event.x) ||
                 event.touches[0].clientX);
         }
     }
