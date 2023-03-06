@@ -4,16 +4,14 @@ import { Range } from 'colorjs.io/types/src/interpolation';
 export class ColorRangeInspector
 {
     private stripEl: any;
-    private inspectorDraggerEl: any;
-    private inspectorUiEl: any;
+    private inspectorEl: any;
     private range: Range;
     private components: ColorComponentInspector[];
 
-    constructor(param0: ColorRangeInspectorContructor)
+    constructor(param0: ColorRangeInspectorConstructor)
     {
         this.stripEl = param0.stripEl;
-        this.inspectorDraggerEl = param0.inspectorDraggerEl;
-        this.inspectorUiEl = param0.inspectorUiEl;
+        this.inspectorEl = param0.inspectorEl;
         this.components = param0.components;
         this.range = param0.range;
 
@@ -45,26 +43,22 @@ export class ColorRangeInspector
         const constrainedEnd = nextPosition > constrainEnd;
 
         if (!(constrainedStart || constrainedEnd)) {
-            this.inspectorUiEl.style.left = (nextPosition -1) + 'px';
-            this.inspectorDraggerEl.style.left = (nextPosition -1) + 'px';
+            this.inspectorEl.style.left = (nextPosition -1) + 'px';
             this.updateValues((nextPosition) / container.width);
         } else if (constrainedStart) {
-            this.inspectorUiEl.style.left = (constrainStart -1) + 'px';
-            this.inspectorDraggerEl.style.left = (constrainStart -1) + 'px';
+            this.inspectorEl.style.left = (constrainStart -1) + 'px';
             this.updateValues(constrainStart / container.width);
         } else if (constrainedEnd) {
-            this.inspectorUiEl.style.left = (constrainEnd -1) + 'px';
-            this.inspectorDraggerEl.style.left = (constrainEnd -1) + 'px';
+            this.inspectorEl.style.left = (constrainEnd -1) + 'px';
             this.updateValues(constrainEnd / container.width);
         }
     }
 }
 
-interface ColorRangeInspectorContructor
+interface ColorRangeInspectorConstructor
 {
     stripEl: Element;
-    inspectorDraggerEl: Element;
-    inspectorUiEl: Element;
+    inspectorEl: Element;
     range: Range;
     stripBackgroundImage: string;
     components: ColorComponentInspector[];
