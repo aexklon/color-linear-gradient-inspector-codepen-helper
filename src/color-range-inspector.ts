@@ -8,6 +8,8 @@ export class ColorRangeInspector
     private range: Range;
     private components: ColorComponentInspector[];
 
+    private moving: boolean = false;
+
     constructor(param0: ColorRangeInspectorConstructor)
     {
         this.stripEl = param0.stripEl;
@@ -21,6 +23,14 @@ export class ColorRangeInspector
             this.stripEl.getBoundingClientRect().x +
             (this.stripEl.getBoundingClientRect().width / 2)
         );
+
+        this.stripEl.addEventListener('mousedown', this.pickup);
+        this.stripEl.addEventListener('mousemove', this.move);
+        this.stripEl.addEventListener('mouseup', this.release);
+        
+        this.stripEl.addEventListener('touchstart', this.pickup);
+        this.stripEl.addEventListener('touchmove', this.move);
+        this.stripEl.addEventListener('touchend', this.release);
     }
 
     private updateValues(percent: number): void
@@ -30,6 +40,38 @@ export class ColorRangeInspector
         this.components.forEach((component, i: number): void => {
             (component.el as any).innerHTML = component.format(color, i);
         })
+    }
+
+    private pickup(event: Event): void
+    {
+        event.preventDefault();
+        event.stopPropagation();
+        this.moving = true;
+        this.stripEl.classList.add('moving');
+        this.updateIndicatorPosition(
+            event.hasOwnProperty('x') ?
+                (event as MouseEvent).x :
+                (event as TouchEvent).touches[0].clientX
+        );
+    }
+
+    private move(event: MouseEvent|TouchEvent): void
+    {
+        if (this.moving) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.updateIndicatorPosition(
+                event.hasOwnProperty('x') ?
+                    (event as MouseEvent).x :
+                    (event as TouchEvent).touches[0].clientX
+            );
+        }
+    }
+
+    private release(): void
+    {
+        this.moving = false;
+        this.stripEl.classList.remove('moving');
     }
 
     private updateIndicatorPosition(evX: number) {
