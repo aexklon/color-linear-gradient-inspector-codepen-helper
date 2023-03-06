@@ -11,12 +11,12 @@ class ColorRangeInspector {
         this.stripEl.style.backgroundImage = param0.stripBackgroundImage;
         this.updateIndicatorPosition(this.stripEl.getBoundingClientRect().x +
             (this.stripEl.getBoundingClientRect().width / 2));
-        this.stripEl.addEventListener('mousedown', this.pickup);
-        this.stripEl.addEventListener('mousemove', this.move);
-        this.stripEl.addEventListener('mouseup', this.release);
-        this.stripEl.addEventListener('touchstart', this.pickup);
-        this.stripEl.addEventListener('touchmove', this.move);
-        this.stripEl.addEventListener('touchend', this.release);
+        this.stripEl.addEventListener('mousedown', (e) => this.pickup(e, this.stripEl));
+        this.stripEl.addEventListener('mousemove', (e) => this.move(e, this.stripEl));
+        this.stripEl.addEventListener('mouseup', (e) => this.release(e, this.stripEl));
+        this.stripEl.addEventListener('touchstart', (e) => this.pickup(e, this.stripEl));
+        this.stripEl.addEventListener('touchmove', (e) => this.move(e, this.stripEl));
+        this.stripEl.addEventListener('touchend', (e) => this.release(e, this.stripEl));
     }
     updateValues(percent) {
         const color = this.range(percent);
@@ -24,16 +24,16 @@ class ColorRangeInspector {
             component.el.innerHTML = component.format(color, i);
         });
     }
-    pickup(event) {
+    pickup(event, stripEl) {
         event.preventDefault();
         event.stopPropagation();
         this.moving = true;
-        this.stripEl.classList.add('moving');
+        stripEl.classList.add('moving');
         this.updateIndicatorPosition(event.hasOwnProperty('x') ?
             event.x :
             event.touches[0].clientX);
     }
-    move(event) {
+    move(event, _stripEl) {
         if (this.moving) {
             event.preventDefault();
             event.stopPropagation();
@@ -42,9 +42,9 @@ class ColorRangeInspector {
                 event.touches[0].clientX);
         }
     }
-    release() {
+    release(_event, stripEl) {
         this.moving = false;
-        this.stripEl.classList.remove('moving');
+        stripEl.classList.remove('moving');
     }
     updateIndicatorPosition(evX) {
         const container = this.stripEl.getBoundingClientRect();

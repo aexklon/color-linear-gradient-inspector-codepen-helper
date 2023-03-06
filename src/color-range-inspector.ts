@@ -24,13 +24,13 @@ export class ColorRangeInspector
             (this.stripEl.getBoundingClientRect().width / 2)
         );
 
-        this.stripEl.addEventListener('mousedown', this.pickup);
-        this.stripEl.addEventListener('mousemove', this.move);
-        this.stripEl.addEventListener('mouseup', this.release);
+        this.stripEl.addEventListener('mousedown', (e: any): any => this.pickup(e, this.stripEl));
+        this.stripEl.addEventListener('mousemove', (e: any): any => this.move(e, this.stripEl));
+        this.stripEl.addEventListener('mouseup', (e: any): any => this.release(e, this.stripEl));
         
-        this.stripEl.addEventListener('touchstart', this.pickup);
-        this.stripEl.addEventListener('touchmove', this.move);
-        this.stripEl.addEventListener('touchend', this.release);
+        this.stripEl.addEventListener('touchstart', (e: any): any => this.pickup(e, this.stripEl));
+        this.stripEl.addEventListener('touchmove', (e: any): any => this.move(e, this.stripEl));
+        this.stripEl.addEventListener('touchend', (e: any): any => this.release(e, this.stripEl));
     }
 
     private updateValues(percent: number): void
@@ -42,12 +42,12 @@ export class ColorRangeInspector
         })
     }
 
-    private pickup(event: Event): void
+    private pickup(event: Event, stripEl: Element): void
     {
         event.preventDefault();
         event.stopPropagation();
         this.moving = true;
-        this.stripEl.classList.add('moving');
+        stripEl.classList.add('moving');
         this.updateIndicatorPosition(
             event.hasOwnProperty('x') ?
                 (event as MouseEvent).x :
@@ -55,7 +55,7 @@ export class ColorRangeInspector
         );
     }
 
-    private move(event: MouseEvent|TouchEvent): void
+    private move(event: MouseEvent|TouchEvent, _stripEl: unknown): void
     {
         if (this.moving) {
             event.preventDefault();
@@ -68,10 +68,10 @@ export class ColorRangeInspector
         }
     }
 
-    private release(): void
+    private release(_event: MouseEvent|TouchEvent, stripEl: Element): void
     {
         this.moving = false;
-        this.stripEl.classList.remove('moving');
+        stripEl.classList.remove('moving');
     }
 
     private updateIndicatorPosition(evX: number) {
